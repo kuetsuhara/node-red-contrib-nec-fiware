@@ -2,7 +2,7 @@ const foClient = require('./fiware_oauth_client.js')
 
 module.exports = function (RED) {
   'use strict'
-  function CreateEntryNode(config) {
+  function CreateEntityNode(config) {
     RED.nodes.createNode(this, config)
     this.login = RED.nodes.getNode(config.login)
     console.log(this.login)
@@ -61,5 +61,5 @@ module.exports = function (RED) {
       node.status({})
     })
   }
-  RED.nodes.registerType('CreateEntry', CreateEntryNode)
+  RED.nodes.registerType('CreateEntity', CreateEntityNode)
 }

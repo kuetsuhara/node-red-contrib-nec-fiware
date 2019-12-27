@@ -17,7 +17,7 @@
   "node-red": {
     "nodes": {
       "fiware": "./nec-fiware/fiware.js",
-      "createEntry": "./nec-fiware/create_entry.js"
+      "createEntry": "./nec-fiware/create_entity.js"
     }
   },
   "homepage": "https://github.com/kuetsuhara/node-red-contrib-nec-fiware#readme",
