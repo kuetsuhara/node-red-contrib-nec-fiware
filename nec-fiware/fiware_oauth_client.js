@@ -3,10 +3,11 @@ const TOKEN_PATH = '/oauth2/token'
 const ENTITIES_PATH = '/v2/entities'
 
 module.exports = class FiwareOauthClient {
-  constructor(server, auth_port, keyrock_port, id, password) {
+  constructor(server, auth_port, keyrock_port, auth_code, id, password) {
     this.server = server
     this.auth_port = auth_port
     this.keyrock_port = keyrock_port
+    this.auth_code = auth_code
     this.id = id
     this.password = password
   }
@@ -15,11 +16,11 @@ module.exports = class FiwareOauthClient {
     var url = this.server + ':' + this.auth_port + TOKEN_PATH
     var headers = {
       'Accept': 'application/json',
-      'Authorization': 'Basic NzFjZWYwMDItZDRjMy00Y2ZkLThiNjYtZTgzNzc5YmZkZTJlOmM5MjZmMzM2LWJlZmItNDQ0Zi1iYTNkLWQ1NWEwZmY1OTkzMA==',
+      'Authorization': this.auth_code,
       'Content-Type': 'application/x-www-form-urlencoded'
     }
 
-    var data = 'username=usr102@dpc-japan.org&password=uF8JXaNr&grant_type=password'
+    var data = 'username=' + this.id + '&password=' + this.password + '&grant_type=password'
 
     var option = {
       url: url,
@@ -32,14 +33,19 @@ module.exports = class FiwareOauthClient {
       form: data
     }
 
+    console.log(option)
+
     request(option, function (error, response, body) {
       if (error) {
         console.log('error', error)
         callback(error)
       }
       if (response.statusCode == 200) {
-        // console.log('body', body)
+        console.log('body', body)
         callback(null, body['access_token'])
+      } else {
+        console.log('body', body)
+        console.log("hooo")
       }
     })
   }
@@ -88,7 +94,6 @@ module.exports = class FiwareOauthClient {
     console.log(option)
     request(option, function (error, response, body) {
       console.log("status code", response.statusCode)
-      console.log("response", response)
       if (error) {
         console.log('error', error)
         callback(error)
@@ -104,18 +109,18 @@ module.exports = class FiwareOauthClient {
   }
 }
 
-const client = require('./fiware_oauth_client.js')
-var cl = new client('https://202.149.16.157', '54406', '44306', 'usr102@dpc-japan.org', 'uF8JXaNr')
-cl.getToken(function (err, token) {
-  if (err) {
-    console.log('get token error!', err)
-  } else {
-    cl.createEntities(token, function (err, success) {
-      if (err) {
-        console.log('Error createEntities', err)
-      } else {
-        console.log('success!', success)
-      }
-    })
-  }
-})
+// const client = require('./fiware_oauth_client.js')
+// var cl = new client('https://202.149.16.157', '54406', '44306', 'usr102@dpc-japan.org', 'uF8JXaNr')
+// cl.getToken(function (err, token) {
+//   if (err) {
+//     console.log('get token error!', err)
+//   } else {
+//     cl.createEntities(token, function (err, success) {
+//       if (err) {
+//         console.log('Error createEntities', err)
+//       } else {
+//         console.log('success!', success)
+//       }
+//     })
+//   }
+// })

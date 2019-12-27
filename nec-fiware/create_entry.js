@@ -1,10 +1,11 @@
-const fClient = require('./fiware_oauth_client.js')
+const foClient = require('./fiware_oauth_client.js')
 
 module.exports = function (RED) {
   'use strict'
   function CreateEntryNode(config) {
     RED.nodes.createNode(this, config)
     this.login = RED.nodes.getNode(config.login)
+    console.log(this.login)
     if (!this.login) {
       console.log('not login ??')
       node.status({
@@ -20,37 +21,43 @@ module.exports = function (RED) {
 
     node.on('input', function (msg) {
       console.log("input! here! haha!")
-      // var cl = new fClient(
-      //   this.login.server, 
-      //   this.login.id, 
-      //   this.login.password)
+      var cl = new foClient(
+        this.login.server,
+        this.login.authport,
+        this.login.keyrockport,
+        this.login.authcode,
+        this.login.id,
+        this.login.password)
 
-      // cl.getToken(function(err, token){
-      //   node.status({ fill: 'green', shape: 'dot', text: 'request...' })
-      //   if(err){
-      //     node.status({ fill: 'red', shape: 'dot', text: 'error' })
-      //     console.log("get token error!", err)
-      //   }else{
-      //     // GET applications
-      //     cl.getApplicationList(token, function(err, success){
-      //       if(err){
-      //         console.log("get aplist error!", err)
-      //         node.status({ fill: 'red', shape: 'dot', text: 'error' })
-      //         msg.payload = err
-      //         node.send(msg)
-      //       }else{
-      //         // console.log(success)
-      //         node.status({})
-      //         msg.payload = success
-      //         node.send(msg)
-      //       }
-      //     })
-      //   }
-      // })
+      cl.getToken(function (err, token) {
+        console.log("come?")
+
+        node.status({ fill: 'green', shape: 'dot', text: 'request...' })
+        if (err) {
+          node.status({ fill: 'red', shape: 'dot', text: 'error' })
+          console.log("get token error!", err)
+        } else {
+          // GET applications
+          console.log("hgoo token!", token)
+          // cl.getApplicationList(token, function (err, success) {
+          //   if (err) {
+          //     console.log("get aplist error!", err)
+          //     node.status({ fill: 'red', shape: 'dot', text: 'error' })
+          //     msg.payload = err
+          //     node.send(msg)
+          //   } else {
+          //     // console.log(success)
+          //     node.status({})
+          //     msg.payload = success
+          //     node.send(msg)
+          //   }
+          // })
+        }
+      })
     })
     node.on('close', function () {
       node.status({})
     })
   }
-  RED.nodes.registerType('CreateEnrty', CreateEntryNode)
+  RED.nodes.registerType('CreateEntry', CreateEntryNode)
 }

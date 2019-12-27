@@ -17,6 +17,10 @@
     <input type="text" id="node-config-input-keyrockport" placeholder="9999">
   </div>
   <div class="form-row">
+    <label for="node-config-input-authcode"><i class="fa fa-server"></i>Authorization code</label>
+    <input type="text" id="node-config-input-authcode" placeholder="Basic xxxxx">
+  </div>
+  <div class="form-row">
       <label for="node-config-input-id"><i class="fa fa-user"></i> ID</label>
       <input type="text" id="node-config-input-id">
   </div>
@@ -35,7 +39,8 @@
       nickname: { value: "Default", required: true },
       server: { value: DEFAULT_SERV, required: true },
       authport: { value: "", required: true },
-      keyrockport: { value: "", required: true }
+      keyrockport: { value: "", required: true },
+      authcode: { value: "", required: true }
     },
     credentials: {
       id: { type: "text", required: false },
