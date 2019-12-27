@@ -106,7 +106,21 @@ module.exports = class FiwareOauthClient {
       }
     }
 
-    console.log(option)
+    request(option, function (error, response, body) {
+      console.log("status code", response.statusCode)
+      if (error) {
+        console.log('error', error)
+        callback(error)
+      }
+      if (response.statusCode == 204) {
+        // return "success", because body is undefined
+        callback(null, "success")
+      } else {
+        console.log('body', body)
+        callback(body, null)
+      }
+    })
+
   }
 }
 

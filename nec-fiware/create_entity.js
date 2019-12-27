@@ -5,7 +5,6 @@ module.exports = function (RED) {
   function CreateEntityNode(config) {
     RED.nodes.createNode(this, config)
     this.login = RED.nodes.getNode(config.login)
-    console.log(this.login)
     if (!this.login) {
       console.log('not login ??')
       node.status({
@@ -20,7 +19,6 @@ module.exports = function (RED) {
     var node = this
 
     node.on('input', function (msg) {
-      console.log("input! here! haha!")
       var cl = new foClient(
         this.login.server,
         this.login.authport,
@@ -30,8 +28,6 @@ module.exports = function (RED) {
         this.login.password)
 
       cl.getToken(function (err, token) {
-        console.log("come?")
-
         node.status({ fill: 'green', shape: 'dot', text: 'request...' })
         if (err) {
           node.status({ fill: 'red', shape: 'dot', text: 'error' })
