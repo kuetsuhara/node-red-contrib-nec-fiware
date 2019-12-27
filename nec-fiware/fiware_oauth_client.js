@@ -84,6 +84,30 @@ module.exports = class FiwareOauthClient {
       }
     })
   }
+
+
+  putEntities(token, target, json_data, callback) {
+    var url = this.server + ':' + this.keyrock_port + ENTITIES_PATH + '/' + target + '/attrs'
+    var headers = {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'fiware-service': '102',
+      'fiware-servicepath': '/',
+      'X-Auth-Token': token
+    }
+
+    var option = {
+      url: url,
+      method: 'PUT',
+      headers: headers,
+      json: json_data,
+      agentOptions: {
+        rejectUnauthorized: false,
+      }
+    }
+
+    console.log(option)
+  }
 }
 
 // const client = require('./fiware_oauth_client.js')
