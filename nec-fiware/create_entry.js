@@ -39,19 +39,21 @@ module.exports = function (RED) {
         } else {
           // GET applications
           console.log("hgoo token!", token)
-          // cl.getApplicationList(token, function (err, success) {
-          //   if (err) {
-          //     console.log("get aplist error!", err)
-          //     node.status({ fill: 'red', shape: 'dot', text: 'error' })
-          //     msg.payload = err
-          //     node.send(msg)
-          //   } else {
-          //     // console.log(success)
-          //     node.status({})
-          //     msg.payload = success
-          //     node.send(msg)
-          //   }
-          // })
+          console.log("payload!!", msg.payload)
+
+          cl.createEntities(token, msg.payload, function (err, success) {
+            if (err) {
+              console.log("get createEntities error!", err)
+              node.status({ fill: 'red', shape: 'dot', text: 'error' })
+              msg.payload = err
+              node.send(msg)
+            } else {
+              console.log(success)
+              node.status({})
+              msg.payload = success
+              node.send(msg)
+            }
+          })
         }
       })
     })

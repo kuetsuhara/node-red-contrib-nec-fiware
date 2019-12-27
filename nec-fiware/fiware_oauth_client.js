@@ -33,8 +33,6 @@ module.exports = class FiwareOauthClient {
       form: data
     }
 
-    console.log(option)
-
     request(option, function (error, response, body) {
       if (error) {
         console.log('error', error)
@@ -50,7 +48,7 @@ module.exports = class FiwareOauthClient {
     })
   }
 
-  createEntities(token, callback) {
+  createEntities(token, json_data, callback) {
     var url = this.server + ':' + this.keyrock_port + ENTITIES_PATH
     var headers = {
       'Content-Type': 'application/json',
@@ -60,32 +58,11 @@ module.exports = class FiwareOauthClient {
       'X-Auth-Token': token
     }
 
-    var data = {
-      'id': 'FujisawaGarbageTruck3',
-      'type': 'Vehicle',
-      'location': {
-        'type': 'geo:point',
-        'value': '36.312, 113.444'
-      },
-      'angle': {
-        'type': 'Number',
-        'value': '68'
-      },
-      'speed': {
-        'type': 'Number',
-        'value': '68'
-      },
-      'timestamp': {
-        'type': 'unixtimestamp',
-        'value': '1231938981134'
-      }
-    }
-
     var option = {
       url: url,
       method: 'POST',
       headers: headers,
-      json: data,
+      json: json_data,
       agentOptions: {
         rejectUnauthorized: false,
       }
@@ -99,8 +76,8 @@ module.exports = class FiwareOauthClient {
         callback(error)
       }
       if (response.statusCode == 201) {
-        console.log('body', body)
-        callback(null, body)
+        // return "success", because body is undefined
+        callback(null, "success")
       } else {
         console.log('body', body)
         callback(body, null)
