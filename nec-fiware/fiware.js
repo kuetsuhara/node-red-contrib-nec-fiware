@@ -1,6 +1,6 @@
 module.exports = function (RED) {
   'use strict'
-  function FiwareCredentialsNode(config) {
+  function NecFiwareCredentialsNode(config) {
     RED.nodes.createNode(this, config)
     this.server = config.server
     if (this.credentials) {
@@ -8,7 +8,7 @@ module.exports = function (RED) {
       this.password = this.credentials.password
     }
   }
-  RED.nodes.registerType('fiware-credentials', FiwareCredentialsNode, {
+  RED.nodes.registerType('nec-fiware-credentials', NecFiwareCredentialsNode, {
     credentials: {
       id: { type: 'text' },
       password: { type: 'password' }
