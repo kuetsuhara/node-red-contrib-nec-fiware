@@ -13,7 +13,7 @@ module.exports = function (RED) {
         text: 'Credential error'
       })
       node.error('No credentials specified')
-      return
+      return this
     }
 
     var node = this
