@@ -33,6 +33,8 @@ module.exports = function (RED) {
         if (err) {
           node.status({ fill: 'red', shape: 'dot', text: 'error' })
           console.log("get token error!", err)
+          msg.payload = err
+          node.send(msg)
         } else {
           // GET applications
           console.log(msg.payload)

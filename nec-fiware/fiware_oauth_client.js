@@ -43,7 +43,7 @@ module.exports = class FiwareOauthClient {
         callback(null, body['access_token'])
       } else {
         console.log('body', body)
-        console.log("hooo")
+        callback(body)
       }
     })
   }
