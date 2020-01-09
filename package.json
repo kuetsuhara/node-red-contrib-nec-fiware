@@ -29,5 +29,11 @@
     "node-red": "^1.0.3",
     "node-red-node-test-helper": "^0.2.3",
     "should": "^13.2.3"
-  }
+  },
+  "keywords": [
+    "node-red",
+    "fiware",
+    "iot",
+    "sensor"
+  ]
 }
