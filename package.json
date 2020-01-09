@@ -1,7 +1,8 @@
 {
   "name": "node-red-contrib-nec-fiware",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "node-red custom node for nec fiware (Keio univ.)",
+  "main": "node.js",
   "scripts": {
     "test": "mocha test/*_spec.js"
   },
@@ -9,16 +10,8 @@
     "type": "git",
     "url": "git+https://github.com/kuetsuhara/node-red-contrib-nec-fiware.git"
   },
-  "author": "kuetsuhara",
   "bugs": {
     "url": "https://github.com/kuetsuhara/node-red-contrib-nec-fiware/issues"
-  },
-  "node-red": {
-    "nodes": {
-      "fiware": "./nec-fiware/fiware.js",
-      "createEntry": "./nec-fiware/create_entity.js",
-      "putEntry": "./nec-fiware/put_entity.js"
-    }
   },
   "homepage": "https://github.com/kuetsuhara/node-red-contrib-nec-fiware#readme",
   "dependencies": {
@@ -31,9 +24,14 @@
   },
   "license": "Apache-2.0",
   "keywords": [
-    "node-red",
-    "fiware",
-    "iot",
-    "sensor"
-  ]
+    "node-red"
+  ],
+  "node-red": {
+    "nodes": {
+      "fiware": "./nec-fiware/fiware.js",
+      "createEntry": "./nec-fiware/create_entity.js",
+      "putEntry": "./nec-fiware/put_entity.js"
+    }
+  },
+  "author": "kuetsuhara"
 }
