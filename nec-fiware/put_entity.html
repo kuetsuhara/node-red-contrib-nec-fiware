@@ -1,14 +1,14 @@
 <script type="text/javascript">
   RED.nodes.registerType('PutEntity', {
     category: 'nec-fiware',
-    color: '#ffffff',
+    color: '#aaaaaa',
     defaults: {
       name: { value: "" },
       login: { type: "nec-fiware-credentials" },
     },
     inputs: 1,
     outputs: 1,
-    icon: "arrow-in.png",
+    icon: "nec-fiware.png",
     label: function () {
       return this.name || "PutEntity";
     }
