@@ -47,7 +47,7 @@ module.exports = class FiwareOauthClient {
           callback(body)
         }
       } else {
-        callback(body)
+        callback("null response", null)
       }
     })
   }
@@ -89,7 +89,7 @@ module.exports = class FiwareOauthClient {
           callback(body, null)
         }
       } else {
-        callback(body, null)
+        callback("null response", null)
       }
     })
   }
@@ -131,9 +131,8 @@ module.exports = class FiwareOauthClient {
           callback(body, null)
         }
       } else {
-        callback(body, null)
+        callback("null response", null)
       }
-
     })
 
   }
