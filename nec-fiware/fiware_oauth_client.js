@@ -38,11 +38,15 @@ module.exports = class FiwareOauthClient {
         console.log('error', error)
         callback(error)
       }
-      if (response.statusCode == 200) {
-        console.log('body', body)
-        callback(null, body['access_token'])
+      if (response) {
+        if (response.statusCode == 200) {
+          console.log('body', body)
+          callback(null, body['access_token'])
+        } else {
+          console.log('body', body)
+          callback(body)
+        }
       } else {
-        console.log('body', body)
         callback(body)
       }
     })
@@ -75,11 +79,16 @@ module.exports = class FiwareOauthClient {
         console.log('error', error)
         callback(error)
       }
-      if (response.statusCode == 201) {
-        // return "success", because body is undefined
-        callback(null, "success")
+
+      if (response) {
+        if (response.statusCode == 201) {
+          // return "success", because body is undefined
+          callback(null, "success")
+        } else {
+          console.log('body', body)
+          callback(body, null)
+        }
       } else {
-        console.log('body', body)
         callback(body, null)
       }
     })
@@ -112,13 +121,19 @@ module.exports = class FiwareOauthClient {
         console.log('error', error)
         callback(error)
       }
-      if (response.statusCode == 204) {
-        // return "success", because body is undefined
-        callback(null, "success")
+
+      if (response) {
+        if (response.statusCode == 204) {
+          // return "success", because body is undefined
+          callback(null, "success")
+        } else {
+          console.log('body', body)
+          callback(body, null)
+        }
       } else {
-        console.log('body', body)
         callback(body, null)
       }
+
     })
 
   }
